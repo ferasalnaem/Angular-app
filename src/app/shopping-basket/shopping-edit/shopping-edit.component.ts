@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { BasketItem } from 'src/app/shared/baket-item.model';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { ShoppingBasketService } from '../shopping-basket.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   editedItem : BasketItem;
 
 
-  constructor(private sbService: ShoppingBasketService) { }
+  constructor(private sbService: ShoppingBasketService, private dataStorageService: DataStorageService) { }
 
   ngOnInit(): void {
     this.subscription = this.sbService.startedEditing.subscribe((index: number) => {
@@ -40,6 +41,15 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   onDelete(){
     this.sbService.deleteBasketItem(this.editedItemIndex);
 
+
+  }
+
+  onSaveItems(){
+    this.dataStorageService.storeBasketItems();
+  }
+
+  onFetchItems(){
+    this.dataStorageService.fetchBasketItems();
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

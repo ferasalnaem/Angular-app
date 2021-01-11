@@ -20,6 +20,11 @@ export class ShoppingBasketService{
 
    }
 
+   setItems(items: BasketItem[]){
+    this.basketItems = items;
+    this.basketItemsChanged.next(this.basketItems.slice());
+   }
+
    updateBasketItem(index: number,  newBasketItem: BasketItem){
        this.basketItems[index] = newBasketItem;
        this.basketItemsChanged.next(this.basketItems.slice());
