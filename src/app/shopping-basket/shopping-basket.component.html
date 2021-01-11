@@ -9,7 +9,7 @@
             *ngFor="let basketItem of basketItems; let i = index"
             (click)="onEditItem(i)"
           >
-            {{ basketItem.model }} ({{basketItem.amount}})
+            {{ basketItem.model }} , amount: {{basketItem.amount}}
           </a>
         </ul>
     </div>
