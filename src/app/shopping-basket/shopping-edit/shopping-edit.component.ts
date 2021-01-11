@@ -1,3 +1,4 @@
+import { formatCurrency } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -14,18 +15,16 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   editedItemIndex: number;
   editedItem : BasketItem;
-  editMode = false;
 
 
   constructor(private sbService: ShoppingBasketService) { }
 
   ngOnInit(): void {
     this.subscription = this.sbService.startedEditing.subscribe((index: number) => {
-      this.editMode = true;
       this.editedItemIndex = index;
       this.editedItem = this.sbService.getbasketItem(index);
       this.sbForm.setValue({
-        // name: this.editedItem.model,
+        name: this.editedItem.model,
         amount: this.editedItem.amount,
         imagPath: this.editedItem.imagPath
       })
@@ -35,7 +34,11 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const value = form.value;
     const newBasketItem = new BasketItem(value.name,value.imagePath ,value.amount);
     this.sbService.updateBasketItem(this.editedItemIndex, newBasketItem);
-    
+    form.reset();
+
+  }
+  onDelete(){
+    this.sbService.deleteBasketItem(this.editedItemIndex);
 
   }
   ngOnDestroy(): void {

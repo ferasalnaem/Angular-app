@@ -24,4 +24,8 @@ export class ShoppingBasketService{
        this.basketItems[index] = newBasketItem;
        this.basketItemsChanged.next(this.basketItems.slice());
    }
+   deleteBasketItem(index: number){
+        this.basketItems.splice(index, 1);
+        this.basketItemsChanged.next(this.basketItems.slice());
+   }
 }
