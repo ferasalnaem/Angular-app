@@ -49,7 +49,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   onFetchItems(){
-    this.dataStorageService.fetchBasketItems();
+    this.dataStorageService.fetchBasketItems().subscribe();
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
