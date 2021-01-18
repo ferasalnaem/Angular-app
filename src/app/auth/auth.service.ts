@@ -6,6 +6,7 @@ import {BehaviorSubject, Subject, throwError} from 'rxjs';
 import { ɵangular_packages_platform_browser_platform_browser_k } from "@angular/platform-browser";
 import { User } from "./user.model";
 import { Router } from "@angular/router";
+import {environment} from "../../environments/environment";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -16,7 +17,7 @@ export class AuthService {
 
     sigup(email: string, password: string) {
         return this.http.post<AuthResponse>(
-            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB0NEwEss6uXdRYAWl55AMQRfV5wYbo7q8',
+            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey,
             {
                 email: email,
                 password: password,
@@ -31,7 +32,7 @@ export class AuthService {
     }
 
     login(email: string, password: string) {
-        return this.http.post<AuthResponse>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB0NEwEss6uXdRYAWl55AMQRfV5wYbo7q8', {
+        return this.http.post<AuthResponse>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +environment.firebaseAPIKey, {
             email: email,
             password: password,
             returnSecureToken: true
