@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ##Running the app from a hosting server (Firebase)
-https://shopping-market-428c0.web.app
+https://shopping-market-428c0.firebaseapp.com
 
 ## Code scaffolding
 
